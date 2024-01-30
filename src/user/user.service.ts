@@ -15,8 +15,10 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  findUserById(id: number): Promise<User> {
-    return this.usersRepository.findOne({ where: { id } });
+  async findUserById(id: number): Promise<User | null> {
+    return this.usersRepository
+      .findOne({ where: { id } })
+      .then((user) => user || null);
   }
 
   async createUser(user: Partial<User>): Promise<User> {
@@ -35,8 +37,9 @@ export class UserService {
 
   //SPECIFIC OPERATIONS
 
-  findByEmail(email: string): Promise<User> {
-    return this.usersRepository.findOne({ where: { email } });
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    return user || null;
   }
 
   async insert(userList: Partial<User>[]): Promise<User[]> {

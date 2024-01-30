@@ -48,7 +48,7 @@ export class UserController {
     return this.usersService.removeUser(id);
   }
 
-  //TODO => Bulk insert of data (necessary only for json file)
+  //!NOTE => Bulk insert of data (necessary only for json file)
   // userInstance = new UserUtil();
 
   // //Inject multiple users
