@@ -1,25 +1,64 @@
-import { Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
-import * as fs from 'fs';
+// import { UserUtil } from 'src/utils/util.entities';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
-  jsonData = fs.readFileSync(
-    'F:/projects/web-api2/src/utils/users.json',
-    'utf-8',
-  );
-  userList: User[] = JSON.parse(this.jsonData);
 
-  //Inject multiple users
-  @Post('multiple')
-  create(userList: Partial<User>[]): { message: string } {
-    try {
-      this.usersService.insert(userList);
-      return { message: 'Users inserted correctly...' };
-    } catch (err) {
-      return { message: 'Error while inserting users...' };
-    }
+  @Get()
+  findAllUser(): Promise<User[]> {
+    return this.usersService.findAllUsers();
   }
+
+  @Get(':id')
+  findUserById(@Param('id') id: number): Promise<User> {
+    return this.usersService.findUserById(id);
+  }
+
+  @Get(':email')
+  findUserByEmail(@Param('email') email: string): Promise<User> {
+    return this.usersService.findByEmail(email);
+  }
+
+  @Post()
+  createUser(@Body() user: Partial<User>): Promise<User> {
+    return this.usersService.createUser(user);
+  }
+
+  @Put(':id')
+  updateUser(
+    @Param('id') id: number,
+    @Body() user: Partial<User>,
+  ): Promise<User> {
+    return this.usersService.updateUser(id, user);
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: number): Promise<void> {
+    return this.usersService.removeUser(id);
+  }
+
+  //TODO => Bulk insert of data (necessary only for json file)
+  // userInstance = new UserUtil();
+
+  // //Inject multiple users
+  // @Post('multiple')
+  // createMultipleUsers(): { message: string } {
+  //   try {
+  //     this.usersService.insert(this.userInstance.userList);
+  //     return { message: 'Users inserted correctly...' };
+  //   } catch (err) {
+  //     return { message: 'Error while inserting users...' };
+  //   }
+  // }
 }
