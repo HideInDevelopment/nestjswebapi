@@ -79,7 +79,7 @@ describe('UserController', () => {
         isActive: true,
       };
 
-      jest.spyOn(userService, 'findByEmail').mockResolvedValue(user);
+      jest.spyOn(userService, 'findUserByEmail').mockResolvedValue(user);
 
       expect(await controller.findUserByEmail(userEmail)).toEqual(user);
     });

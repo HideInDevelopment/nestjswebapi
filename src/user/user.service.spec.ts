@@ -64,16 +64,14 @@ describe('UserService', () => {
       expect(result).toEqual(user);
     });
 
-    // it('should return null if user is not found', async () => {
-    //   const userId = 999;
-
-    //   const result = await service.findUserById(userId);
-
-    //   expect(result).toBeNull();
-    // });
+    it('should return null if user is not found', async () => {
+      jest.spyOn(repository, 'findOne').mockResolvedValue(null);
+      const result = await service.findUserById(999);
+      expect(result).toBeNull();
+    });
   });
 
-  describe('findByEmail', () => {
+  describe('findUserByEmail', () => {
     it('should return a user by email', async () => {
       const userEmail = 'user1@gmail.com';
       const user: User = {
@@ -88,18 +86,16 @@ describe('UserService', () => {
 
       jest.spyOn(repository, 'findOne').mockResolvedValue(user);
 
-      const result = await service.findByEmail(userEmail);
+      const result = await service.findUserByEmail(userEmail);
 
       expect(result).toEqual(user);
     });
 
-    // it('should return null if user is not found', async () => {
-    //   const userEmail = '';
-
-    //   const result = await service.findByEmail(userEmail);
-
-    //   expect(result).toBeNull();
-    // });
+    it('should return null if user is not found', async () => {
+      jest.spyOn(repository, 'findOne').mockResolvedValue(null);
+      const result = await service.findUserByEmail('user2@gmail.com');
+      expect(result).toBeNull();
+    });
   });
 
   describe('createUser', () => {

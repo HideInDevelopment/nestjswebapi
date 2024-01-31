@@ -25,9 +25,9 @@ export class UserController {
     return this.usersService.findUserById(id);
   }
 
-  @Get(':email')
+  @Get('email/:email')
   findUserByEmail(@Param('email') email: string): Promise<User> {
-    return this.usersService.findByEmail(email);
+    return this.usersService.findUserByEmail(email);
   }
 
   @Post()
