@@ -9,7 +9,7 @@ export class UserService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
-  //CRUD OPERATIONS ss
+  //CRUD OPERATIONS
 
   findAllUsers(): Promise<User[]> {
     return this.usersRepository.find();
