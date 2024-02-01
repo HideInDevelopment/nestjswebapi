@@ -6,10 +6,12 @@ import {
   Post,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 // import { UserUtil } from 'src/utils/util.entities';
 
 @Controller('user')
@@ -26,6 +28,7 @@ export class UserController {
     status: 200,
     description: 'A list of users',
   })
+  @UseGuards(JwtAuthGuard)
   findAllUser(): Promise<User[]> {
     return this.usersService.findAllUsers();
   }

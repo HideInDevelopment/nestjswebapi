@@ -8,8 +8,6 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    DatabaseModule,
-    UserModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -21,6 +19,8 @@ import { AuthModule } from './auth/auth.module';
       migrations: [__dirname + '/migrations/*{.ts, .js}'],
       synchronize: true,
     }),
+    DatabaseModule,
+    UserModule,
     AuthModule,
   ],
   controllers: [AppController],
