@@ -5,10 +5,10 @@ const connectionFactory = {
   provide: 'CONNECTION',
   useFactory: async () => {
     return await createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'V=zTE)mq7yXDkA6',
-      database: 'webapi2',
+      host: process.env.DB_LOCALHOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
     });
   },
 };
