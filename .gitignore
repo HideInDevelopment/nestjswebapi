@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # .gitingore
 .env
+
+# Custom files
+/src/utils/users.json
