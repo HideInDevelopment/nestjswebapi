@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { User } from 'src/user/user.entity';
+import { User } from '../auth/user.entity';
 
 export class UserUtil {
   jsonFile: string = ''; //? => Add here your jsonFile url to perform the insert of users

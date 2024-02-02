@@ -2,10 +2,9 @@ import { DatabaseModule } from './database/database.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 
 //Create own .env file in each case to implement own database configuration and stuff
 dotenv.config();
@@ -24,7 +23,6 @@ dotenv.config();
       synchronize: true,
     }),
     DatabaseModule,
-    UserModule,
     AuthModule,
   ],
   controllers: [AppController],
