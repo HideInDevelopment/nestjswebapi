@@ -27,6 +27,4 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
-
-  //TODO => Entities with relationShip (role?, something else?)
 }

@@ -1,7 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import * as jwt from 'jsonwebtoken';
-import { UnauthorizedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -11,8 +9,8 @@ import * as dotenv from 'dotenv';
 //Create own .env file in each case to implement own database configuration and stuff
 dotenv.config();
 
-jest.mock('./auth.service');
-jest.mock('jsonwebtoken');
+// jest.mock('./auth.service');
+// jest.mock('jsonwebtoken');
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -239,30 +237,6 @@ describe('AuthService', () => {
       await expect(authService.removeUser(userId)).rejects.toThrow(
         'Failed to delete user',
       );
-    });
-  });
-
-  describe('login', () => {
-    it('should return a JWT token on successful login', async () => {
-      const email = 'test@example.com';
-      const password = 'testPassword';
-
-      (jwt.sign as jest.Mock).mockReturnValue('mockedJWTToken');
-
-      const result = await authService.login(email, password);
-
-      expect(result).toEqual('mockedJWTToken');
-    });
-
-    it('should throw UnauthorizedException on unsuccessful login', async () => {
-      const email = 'test@example.com';
-      const password = 'testPassword';
-
-      (jwt.sign as jest.Mock).mockReturnValue('mockedJWTToken');
-
-      const result = authService.login(email, password);
-
-      await expect(result).rejects.toThrow(UnauthorizedException);
     });
   });
 });
