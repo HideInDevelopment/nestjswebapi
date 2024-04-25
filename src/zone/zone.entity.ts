@@ -1,6 +1,12 @@
 import { Category } from 'src/category/category.entity';
 import { Store } from 'src/store/store.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Zone {
@@ -20,5 +26,6 @@ export class Zone {
   stores: Store[];
 
   @ManyToMany(() => Category, (category) => category.zones)
+  @JoinTable()
   categories: Category[];
 }

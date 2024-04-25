@@ -2,7 +2,7 @@ import { Product } from 'src/product/product.entity';
 import { Zone } from 'src/zone/zone.entity';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-Entity();
+@Entity()
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
